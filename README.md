@@ -20,4 +20,14 @@ d._bground = 0xffff
 d.fill_screen(d._bground)
 ```
 
+This is for a 128 x 160 display that uses a different set of pins to the default
+```python
+import ST7735
+d = ST7735.ST7735(rst=14, ce=13, dc=12, dout=0, din=5, clk=4)
+d.reset()
+d.begin()
+d._bground = 0xffff
+d.fill_screen(d._bground)
+```
+
 
