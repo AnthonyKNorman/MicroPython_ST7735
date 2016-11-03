@@ -1,9 +1,11 @@
-from ST7735S import ST7735S
-from bmp import bmp
 import time
 import lcd_gfx
+from bmp import bmp
+import machine
+import ST7735
 
-d = ST7735S()
+spi = machine.SPI(1, baudrate=8000000, polarity=0, phase=0)
+d = ST7735.ST7735(spi, rst=4, ce=5, dc=16)
 d.reset()
 d.begin()
 d._bground = 0xffff
