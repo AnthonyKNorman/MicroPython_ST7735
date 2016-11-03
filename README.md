@@ -32,4 +32,4 @@ d._bground = 0xffff
 d.fill_screen(d._bground)
 ```
 
-
+.mpy versions are available in the releases
