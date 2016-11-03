@@ -68,15 +68,12 @@ ST7735_MADCTL_BGR = 0x08
 ST7735_MADCTL_MH = 0x04
 
 class ST7735():
-	def __init__(self, rst=4, ce=5, dc=16, dout=12, din=13, clk=14, offset=0, c_mode='RGB'):
+	def __init__(self, spi, rst=4, ce=5, dc=16, offset=0, c_mode='RGB'):
 		self._rst = Pin(rst, Pin.OUT)   	# 4
 		self._ce = Pin(ce, Pin.OUT)    		# 5
 		self._ce.high()
 		self._dc = Pin(dc, Pin.OUT)    		# 16
 		self._dc.high()	
-		self._dout = dout					# 12	MISO - not connected
-		self._din = din						# 13 MOSI
-		self._clk = clk						# 14 SCLK
 		self._offset = offset
 		self._x = 0
 		self._y = 0
@@ -90,10 +87,8 @@ class ST7735():
 			self._color_mode = ST7735_MADCTL_BGR
 
 		# SPI
-
-		self._spi = SPI(baudrate=100000, polarity=1, phase=0, sck=Pin(self._clk), mosi=Pin(self._din), miso=Pin(self._dout))
-		self._spi.init(baudrate=200000) # set the baudrate
-
+		self._spi = spi
+		
 	def command(self,c):
 		b = bytearray(1)
 		b[0] = c
